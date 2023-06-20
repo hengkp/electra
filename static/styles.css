@@ -1,0 +1,260 @@
+/* Header Styles */
+.header {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.header nav ul li {
+    float: left;
+    margin-right: 10px;
+}
+
+.header nav ul li a {
+    display: block;
+    color: #333;
+    text-align: center;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.header nav ul li a:hover {
+    background-color: #ddd;
+}
+
+.header nav ul li.active a {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+p {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group select {
+    height: 40px;
+  }
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.expired {
+    color: red;
+}
+
+input[type="datetime-local"] {
+    width: 100%;
+    font-size: 12px;
+    padding: 8px;
+}
+
+.readonly-input {
+    background-color: #f8f8f8;
+    cursor: not-allowed;
+}
+
+form {
+    font-size: 16px;
+}
+
+.form-group label {
+    font-size: 18px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    font-size: 16px;
+}
+
+.btn-submit {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #45a049;
+}
+
+.btn {
+    background-color: #ddd;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #ccc;
+}
+
+.btn-space {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.choices {
+    margin-top: 20px;
+}
+
+.choice {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.choice input[type="radio"] {
+    margin-right: 10px;
+}
+
+.choice label {
+    font-size: 16px;
+}
+
+.choice:hover label {
+    color: #4CAF50;
+    cursor: pointer;
+}
+
+/* Infographic Styles */
+.infographic {
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.infographic h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.infographic .result-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.infographic .choice-ranking {
+    flex-basis: 50%;
+}
+
+.infographic .choice-ranking ol {
+    list-style-type: decimal;
+}
+
+.infographic .voters-info {
+    flex-basis: 50%;
+}
+
+.infographic .total-voters h4,
+.infographic .voters-per-choice h4 {
+    margin-top: 0;
+}
+
+.infographic .voters-per-choice ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.infographic .voters-per-choice ul li {
+    margin-bottom: 5px;
+}
+
+.td.active {
+    color: blue;
+}
+
+.td.inactive {
+    color: red;
+}
+
+.td.not-found {
+    color: gray;
+}

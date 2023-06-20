@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vote Panel</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    
+  
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="container">
+        <h1>Vote Panel</h1>
+        <br/>
+        <br/>
+        <h2>{{ vote['topic_name'] }}</h2>
+        <p>{{ vote['description'] }}</p>
+        <br/>
+        {% if time_remaining == 0 %}
+            <p><strong>Time Remaining:</strong> Expired</p>
+        {% else %}
+            <p><strong>Time Remaining:</strong>
+            {% if time_remaining.days >= 30 %}
+                {{ time_remaining.days // 30 }} months
+            {% endif %}
+            {% if time_remaining.days % 30 > 0 %}
+                {{ time_remaining.days % 30 }} days
+            {% endif %}
+            {% if time_remaining.seconds // 3600 > 0 %}
+                {{ time_remaining.seconds // 3600 }} hours
+            {% endif %}
+            {% if (time_remaining.seconds // 60) % 60 > 0 %}
+                {{ (time_remaining.seconds // 60) % 60 }} minutes
+            {% endif %}
+            {% if time_remaining.seconds % 60 > 0 %}
+                {{ time_remaining.seconds % 60 }} seconds
+            {% endif %}
+            </p>
+        {% endif %}
+        <br/>
+        {% if not time_remaining == 0 %}
+            <form action="{{ url_for('vote', vote_id=vote['id']) }}" method="POST">
+                <div class="form-group">
+                    <label for="choice">Selected Choice:</label>
+                    <br/>
+                    <div class="choices">
+                        {% for choice in vote['choices'] %}
+                            <div class="choice">
+                                <input type="radio" id="choice{{ loop.index }}" name="choice" value="{{ choice }}" required>
+                                <label for="choice{{ loop.index }}">{{ choice }}</label>
+                            </div>
+                            <br/>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="error-message">{{ message }}</div>
+                <br/>
+                <button type="submit" class="btn-submit">Vote</button>
+            </form>
+        {% else %}
+            <div class="result">
+              <div class="infographic">
+                  <h3>Results</h3>
+                  <div class="result-info">
+                      <div class="choice-ranking">
+                          <div class="total-voters">
+                              <h4>Total Voters : <stong>{{ vote['voters'] }}</stong></h4>
+                          </div>
+                          <h4>Choice Ranking :</h4>
+                          <ol>
+                              {% for choice in vote_rank %}
+                                  <li>{{ choice }}</li>
+                                  <br/>
+                              {% endfor %}
+                          </ol>
+                      </div>
+                      <div class="voters-info">
+                          <div class="voters-per-choice">
+                            <h4>Voters per Choice :</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        {% for choice in vote_rank %}
+                                            <th>{{ choice }} : {{ vote['result'][choice]['count'] }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in range(max_voters) %}
+                                        <tr>
+                                          {% for choice in vote_rank %}
+                                            {% set voters = vote['result'][choice]['voters'] %}
+                                            {% if i < voters|length %}
+                                                {% set voter = voters[i] %}
+                                                <td class="td {{ voters[i] | user_font_style }}">
+                                                    {{ voters[i] }}
+                                                </td>                                                                                              
+                                            {% else %}
+                                                <td>&nbsp;</td>
+                                            {% endif %}
+                                          {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        {% endif %}
+    </div>
+</body>
+</html>

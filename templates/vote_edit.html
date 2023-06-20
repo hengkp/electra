@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Vote Content</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var counter = {{ vote['choices']|length }};
+            
+            $("#addChoice").click(function () {
+                counter++;
+                
+                var choiceField = '<div class="form-group">' +
+                    '<label for="choice' + counter + '">Choice ' + counter + ':</label>' +
+                    '<input type="text" id="choice' + counter + '" name="choices[]" required>' +
+                    '</div>';
+                $("#choicesContainer").append(choiceField);
+            });
+            
+            $("#removeChoice").click(function () {
+                if (counter > 1) {
+                    $("#choicesContainer").children().last().remove();
+                    counter--;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="container">
+        <h1>Edit Vote Content</h1>
+        <form action="{{ url_for('vote_edit', vote_id=vote['id']) }}" method="POST">
+            <div class="form-group">
+                <label for="topic_name">Title:</label>
+                <input type="text" id="topic_name" name="topic_name" value="{{ vote['topic_name'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" value="{{ vote['description'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="expired_date">Expired Date & Time:</label>
+                <input type="datetime-local" id="expired_date" name="expired_date" value="{{ vote['expired_date'] }}" required>
+            </div>
+
+            <div id="choicesContainer">
+                {% for choice in vote['choices'] %}
+                    <div class="form-group">
+                        <label for="choice{{ loop.index }}">Choice {{ loop.index }}:</label>
+                        <input type="text" id="choice{{ loop.index }}" name="choices[]" value="{{ choice }}" required>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="button" id="addChoice" class="btn btn-primary btn-space">Add Choice</button>
+                </div>
+                <div class="col">
+                    <button type="button" id="removeChoice" class="btn btn-danger btn-space">Remove Latest Choice</button>
+                </div>
+            </div>
+            
+            <div class="error-message">{{ message }}</div>
+
+            <input type="submit" value="Update" class="btn-submit">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electra Voting Platform</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    {% include "header.html" %}
+    <br/>
+    <div class="container">
+        <h1>Welcome to Electra</h1>
+        <h2>An Online Voting Platform</h2>
+        <p>
+            "Electra is a powerful and user-friendly Online Voting Platform designed to facilitate secure and efficient voting processes. With Electra, you can easily create, manage, and participate in various voting sessions, empowering individuals and organizations to make collective decisions. Enjoy seamless access, comprehensive result tracking, and real-time updates, ensuring transparency and integrity in every voting event. Electra is your go-to platform for reliable and hassle-free online voting experiences."
+        </p>
+        {% if user %}
+            <h2>Active Vote Topics</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Topic Name</th>
+                        <th>Description</th>
+                        <th>Expired Date</th>
+                        <th>Total Voters</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vote in active_votes %}
+                        <tr>
+                            <td>{{ vote.id }}</td>>
+                            <td><a href="{{ url_for('vote', vote_id=vote.id) }}">{{ user.username | mark_topic_voted(vote) }} {{ vote.topic_name }}</a></td>
+                            <td>{{ vote.description }}</td>
+                            <td>{{ vote['expired_date'] | format_datetime | safe }}</td>
+                            <td>{{ vote.voters }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Please register or login to view and participate in active votes.</p>
+        {% endif %}
+        <br/>
+        <div class="error-message">{{ message }}</div>
+        <br/>
+    </div>
+</body>
+</html>

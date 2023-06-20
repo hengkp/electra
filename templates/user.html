@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="container">
+        <h1>User Profile</h1>
+        <form action="{{ url_for('user_profile') }}" method="POST">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{ user_edit['username'] }}" class="readonly-input" readonly>
+              </div>              
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" value="{{ user_edit['first_name'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" value="{{ user_edit['last_name'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ user_edit['email'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" value="{{ user_edit['phone'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="male" {% if user_edit['gender'] == 'male' %}selected{% endif %}>Male</option>
+                    <option value="female" {% if user_edit['gender'] == 'female' %}selected{% endif %}>Female</option>
+                    <option value="trans" {% if user_edit['gender'] == 'trans' %}selected{% endif %}>Trans</option>
+                    <option value="undefined" {% if user_edit['gender'] == 'undefined' %}selected{% endif %}>Undefined</option>
+                </select>
+            </div>
+
+            <input type="submit" value="Update" class="btn-submit">
+        </form>
+    </div>
+</body>
+</html>

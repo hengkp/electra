@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Handle checkbox click event
+            $('.vote-checkbox').on('click', function() {
+                var voteId = $(this).val();  // Get the value of the clicked checkbox
+                
+                if ($(this).is(':checked')) {
+                    // Checkbox is checked, update session['vote_id']
+                    $.ajax({
+                        url: "{{ url_for('update_vote_id') }}",  // URL to update vote_id using Flask route
+                        type: "POST",
+                        data: { vote_id: voteId },
+                        success: function(response) {
+                            console.log("Session vote_id updated successfully!");
+                        },
+                        error: function(xhr, status, error) {
+                            console.log("Error updating session vote_id:", error);
+                        }
+                    });
+                } else {
+                    // Checkbox is unchecked, clear session['vote_id']
+                    $.ajax({
+                        url: "{{ url_for('clear_vote_id') }}",  // URL to clear vote_id using Flask route
+                        type: "POST",
+                        success: function(response) {
+                            console.log("Session vote_id cleared successfully!");
+                        },
+                        error: function(xhr, status, error) {
+                            console.log("Error clearing session vote_id:", error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        function unselectButton_vote() {
+            var Buttons = document.getElementsByName("vote_id");
+            for (var i = 0; i < Buttons.length; i++) {
+                Buttons[i].checked = false;
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Handle checkbox click event
+            $('.user-checkbox').on('click', function() {
+                var userId = $(this).val();  // Get the value of the clicked checkbox
+                
+                if ($(this).is(':checked')) {
+                    // Checkbox is checked, update session['user_id']
+                    $.ajax({
+                        url: "{{ url_for('update_user_id') }}",  // URL to update user_id using Flask route
+                        type: "POST",
+                        data: { user_id: userId },
+                        success: function(response) {
+                            console.log("Session user_id updated successfully!");
+                        },
+                        error: function(xhr, status, error) {
+                            console.log("Error updating session user_id:", error);
+                        }
+                    });
+                } else {
+                    // Checkbox is unchecked, clear session['user_id']
+                    $.ajax({
+                        url: "{{ url_for('clear_user_id') }}",  // URL to clear user_id using Flask route
+                        type: "POST",
+                        success: function(response) {
+                            console.log("Session user_id cleared successfully!");
+                        },
+                        error: function(xhr, status, error) {
+                            console.log("Error clearing session user_id:", error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        function unselectButton_user() {
+            var Buttons = document.getElementsByName("user_id");
+            for (var i = 0; i < Buttons.length; i++) {
+                Buttons[i].checked = false;
+            }
+        }
+    </script>
+    
+
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="container">
+        <h1>Admin Panel</h1>
+        <br/>
+        <br/>
+        <h2>Vote Contents</h2>
+        <div>
+            <a href="{{ url_for('vote_create') }}" class="btn-submit">Add</a>
+            <a href="{{ url_for('vote_edit', vote_id=session['vote_id']) }}" class="btn-submit">Edit</a>
+            <a href="{{ url_for('vote_delete', vote_id=session['vote_id']) }}" class="btn-submit">Remove</a>
+            <a href="{{ url_for('vote_reorder') }}" class="btn-submit">Reorder</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th onclick="unselectButton_vote()">Action</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Expired Date</th>
+                    <th>Voters</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vote in vote_contents %}
+                    <tr>
+                        <td><input type="radio" name="vote_id" value="{{ vote['id'] }}" class="vote-checkbox"></td>
+                        <td><a href="{{ url_for('vote', vote_id=vote['id']) }}">{{ vote['topic_name'] }}</a></td>
+                        <td>{{ vote['description'] }}</td>
+                        <td>{{ vote['expired_date'] | format_datetime | safe }}</td>
+                        <td>{{ vote['voters'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+        <br/>
+        <h2>User Accounts</h2>
+        <div>
+            <a href="{{ url_for('user_create') }}" class="btn-submit">Add</a>
+            <a href="{{ url_for('user_edit', user_id=session['user_id']) }}" class="btn-submit">Edit</a>
+            <a href="{{ url_for('user_delete', user_id=session['user_id']) }}" class="btn-submit">Remove</a>
+            <a href="{{ url_for('user_reorder') }}" class="btn-submit">Reorder</a>
+            <a href="{{ url_for('user_activate', user_id=session['user_id']) }}" class="btn-submit">Activate/Suspend</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th onclick="unselectButton_user()">Action</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Active Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in user_accounts %}
+                    <tr>
+                        <td><input type="radio" name="user_id" value="{{ user['id'] }}" class="user-checkbox"></td>
+                        <td>{{ user['username'] }}</td>
+                        <td>{{ user['email'] }}</td>
+                        <td class="td {{ user['username'] | user_font_style }}">
+                            {{ user['active_status'] }}
+                        </td>  
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+        <div class="error-message">{{ message }}</div>
+        <br/>
+    </div>
+</body>
+</html>
