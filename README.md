@@ -34,6 +34,22 @@ Electra is a robust and intuitive Online Voting Platform designed to streamline 
    http://localhost:5000
    ```
 
+## Demo
+
+You can try out the demo version of the "Electra: Online Voting Platform" by visiting the GitHub Pages site for this project: [electra-voting-platform Demo](https://hengkp.github.io/electra-voting-platform/)
+
+The demo allows you to explore the features and functionality of the online voting platform. Please note that the demo may not have all the capabilities of a production-ready deployment.
+
+To access the admin panel in the demo version, use the following credentials:
+
+- Username: `admin`
+- Password: `password123`
+
+Feel free to create new accounts, vote on topics, and explore the various features of the platform.
+
+Please keep in mind that the demo version is for demonstration purposes only and may not be actively monitored or maintained. For a fully functional and secure deployment, it is recommended to set up the platform on your own server or hosting environment.
+
+
 ## Contributing
 
 We welcome contributions from the open-source community! If you'd like to contribute to Electra, please follow these steps:
