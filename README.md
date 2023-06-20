@@ -29,12 +29,12 @@ Electra is a robust and intuitive Online Voting Platform designed to streamline 
    ```
 2. Install the required dependencies:
    ```bash
-   pip install -r requirements.txt
+   python3 -m pip install -r requirements.txt
    ```
 3. Configure the database settings in config.py.
 4. Run the application:
    ```bash
-   python app.py
+   python3 app.py
    ```
 5. Access the application in your web browser:
    ```
