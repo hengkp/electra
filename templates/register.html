@@ -50,7 +50,7 @@
             </div>
 
             <div class="error-message">{{ message }}</div>
-
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <input type="submit" value="Register" class="btn-submit">
         </form>
     </div>

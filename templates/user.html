@@ -48,7 +48,7 @@
                     <option value="undefined" {% if user_edit['gender'] == 'undefined' %}selected{% endif %}>Undefined</option>
                 </select>
             </div>
-
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <input type="submit" value="Update" class="btn-submit">
         </form>
     </div>

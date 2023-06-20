@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_wtf import CSRFProtect
 from routes_home import home
 from routes_admin import admin, vote_create, vote_edit, vote_delete, vote_reorder, update_vote_id, clear_vote_id, user_create, user_edit, user_delete, user_reorder, user_activate, update_user_id, clear_user_id
 from routes_vote import vote, search_username_in_choices
@@ -27,7 +28,11 @@ with open('voting_contents.json') as f:
     voting_contents = json.load(f)
 
 app = Flask(__name__)
+csrf = CSRFProtect(app)
 app.secret_key = "aa94a4a6c7c16cc424404fb19568aa37"
+app.config['SECRET_KEY'] = "aa94a4a6c7c16cc424404fb19568aa37"
+app.config['WTF_CSRF_ENABLED'] = True
+
 
 # Home page
 app.route('/')(home)
