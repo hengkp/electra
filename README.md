@@ -43,7 +43,7 @@ Electra is a robust and intuitive Online Voting Platform designed to streamline 
 
 ## Demo
 
-You can try out the demo version of the "Electra: Online Voting Platform" by visiting the GitHub Pages site for this project: [electra-voting-platform Demo](https://hengkp.github.com/electra-voting-platform/)
+You can try out the demo version of the "Electra: Online Voting Platform" by visiting the GitHub Pages site for this project: [electra-voting-platform Demo](https://www.example.com/)
 
 The demo allows you to explore the features and functionality of the online voting platform. Please note that the demo may not have all the capabilities of a production-ready deployment.
 
