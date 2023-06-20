@@ -19,7 +19,14 @@ Electra is a robust and intuitive Online Voting Platform designed to streamline 
    ```bash
    git clone https://github.com/hengkp/electra-voting-platform.git
    ```
-
+2. Setup virtual environment
+   ```bash
+   python3 -m venv electra
+   ```
+3. Activate virtual environment
+   ```bash
+   source electra/bin/activate
+   ```
 2. Install the required dependencies:
    ```bash
    pip install -r requirements.txt
